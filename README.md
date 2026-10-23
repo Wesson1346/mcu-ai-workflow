@@ -117,6 +117,37 @@ chmod +x install.sh
 
 > ⚠️ 本仓库默认 **HAL + CMake**。如果你用 Keil + 标准库，需要按 `orchestrator/references/toolchain-baseline.md` 里的换算表调整。
 
+## 在别的 AI IDE 里用
+
+这套东西的核心是 Markdown 方法论，不绑平台。差别只在"入口文件叫什么"：
+
+| 平台 | 怎么做 | 能不能自动触发 |
+| --- | --- | --- |
+| **CodeBuddy / WorkBuddy** | 跑 `install.ps1` 装成 skill | ✅ 能 |
+| **Qoder** | **把 `AGENTS.md` 复制到项目根目录** | ⚠️ 规则常驻，但不会自动"进流程"，仍需你开口 |
+| 其他支持 `AGENTS.md` 的 agent | 同上 | 同上 |
+
+### Qoder 特别说明
+
+Qoder 官方[明确支持 `AGENTS.md`](https://docs.qoder.com/zh/user-guide/rules)：复制到项目目录即可，
+无需额外配置，IDE / CLI / JetBrains 插件都生效。
+
+三点注意：
+
+1. **规则优先于 AGENTS.md**：如果项目里已经有 `.qoder/rules/*.md`，两边冲突时以规则为准
+2. **AGENTS.md 建议控制在 100 行内**：本仓库的这份是 80 行，正好
+3. **规则总上限 100,000 字符**：远不会碰到
+
+### 两种机制的体验差异
+
+| | CodeBuddy（skill） | Qoder（AGENTS.md） |
+| --- | --- | --- |
+| 加载方式 | **按需**——说到相关话题才把 `SKILL.md` 读进上下文 | **常驻**——每次对话都带这份规则 |
+| 上下文成本 | 平时几乎为零 | 固定约 4 KB |
+| 触发 | 语义匹配，能自动进流程 | 靠你明确说「按六步法做」 |
+
+所以 Qoder 里的实际体验是：**规则一直在、但需要你点一下火**。方法论照常执行，只是少了"自动接管"这一层。
+
 ## 设计上的几个取舍
 
 **为什么编排器只有一个，其他 skill 不注册？**
