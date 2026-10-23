@@ -69,6 +69,19 @@ chmod +x install.sh
 
 > 已安装过要重装：`.\install.ps1 -Force` 或 `./install.sh --force`
 
+## 修改后如何生效（重要）
+
+仓库里的 `orchestrator/` 是**源文件**（含 `{{AI_SKILL_ROOT}}` 占位符），
+`~/.workbuddy/skills/mcu-project-orchestrator/` 是**安装后的副本**（占位符已替换成本机路径）。
+
+| 你改了什么 | 怎么生效 |
+| --- | --- |
+| `orchestrator/` 里的文件 | **重跑一次安装**：`.\install.ps1 -Force` 或 `./install.sh --force` |
+| `AI-Skill/` 里的 skill | **不用管**，立刻生效（编排器用绝对路径直接引用，没有副本） |
+
+> ⚠️ **不要直接编辑 `~/.workbuddy/skills/` 里那份**。下次重装会被覆盖，改动就丢了。
+> 正确做法永远是：改仓库 → 重装。
+
 ## 目录结构
 
 ```
