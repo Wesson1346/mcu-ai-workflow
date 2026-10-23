@@ -1,0 +1,26 @@
+# ===== 项目产物（六步法生成，不进仓库） =====
+/*.md
+!/README.md
+!/AGENTS.md
+
+# ===== 课件提炼内容（版权归原作者，不随仓库分发） =====
+AI-Skill/course-notes/*.md
+!AI-Skill/course-notes/README.md
+
+# ===== 工作区数据 =====
+.workbuddy/
+
+# ===== 编译产物（如果用仓库目录做工程） =====
+build/
+*.o
+*.elf
+*.bin
+*.hex
+
+# ===== 系统与编辑器 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
